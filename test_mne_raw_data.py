@@ -14,15 +14,15 @@ import os
 #%% load raw object file
 
 # Subject directory
-sub_dir = 'Pilot_2'
+sub_dir = 'test_recording'
 # Paradigm directory
 param_dir = 'run_files'
 # Subject stromg
-sub_str = 'pilot_1'
+sub_str = 'test'
 # Recording directory
 fpath = 'D:' + os.sep + 'VR-EEG' + os.sep + sub_dir + os.sep + param_dir
 
-filename = fpath + os.sep + sub_str + '_run_2.fif'
+filename = fpath + os.sep + sub_str + '_run_1.fif'
 
 raw = mne.io.read_raw_fif(filename, preload=True)
 
