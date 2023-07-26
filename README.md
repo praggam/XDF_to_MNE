@@ -1,8 +1,13 @@
 # XDF_to_MNE
 
 ## xdf_to_mne_vr-egg_main.py
-Converting xdf-file(s) recorded with LabRecorder to MNE raw object
-
+* Converting xdf-file(s) recorded with LabRecorder to MNE raw object
+* Including test data (test_run_1.xdf in test_recroding/run_files)
+* Generates figures
+	* EEG stream consistency
+   	* Event markers plot
+   	* Hand position coordinates
+   	  
 ### Flow:
 1. Scanning directory with xdf-file(s)
 2. Loading xdf-file(s)
