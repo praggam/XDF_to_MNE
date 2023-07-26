@@ -27,13 +27,13 @@ Converting xdf-file(s) recorded with LabRecorder to MNE raw object
 1. Define stream name: stream_new_stream = 'new_stream'
 2. Add stream name to the list: stream_names = [stream_neurone, stream_markers, stream_hand_pos, stream_new_stream]
 3. Define stream selecting function (structure can be copied from other stream selecting functions):  
-	def stream_select_new_stream(streams, streams_all, stream_name, stream_idx, run_idx):  
-		new_stream_data = streams[stream_idx]['time_series'][:,0]  
-		'''  
-		Your additional code here  
-		'''  
-		streams_all[stream_name]['time_series'].append(hand_pos_data)  
-		return streams_all  
+    def stream_select_new_stream(streams, streams_all, stream_name, stream_idx, run_idx):  
+        new_stream_data = streams[stream_idx]['time_series'][:,0]  
+        '''  
+        Your additional code here  
+        '''  
+        streams_all[stream_name]['time_series'].append(hand_pos_data)  
+        return streams_all  
 4. Add function to main() in LSL streams loop:
     if stream_name == stream_neurone: # EEG stream
         streams_all = stream_select_eeg(streams, streams_all, stream_name, stream_idx, run_idx)
