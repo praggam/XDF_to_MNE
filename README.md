@@ -35,17 +35,13 @@ Converting xdf-file(s) recorded with LabRecorder to MNE raw object
 		streams_all[stream_name]['time_series'].append(hand_pos_data)
 		return streams_all
 4. Add function to main() in LSL streams loop:
-	# EEG stream
-    if stream_name == stream_neurone:
+    if stream_name == stream_neurone: # EEG stream
         streams_all = stream_select_eeg(streams, streams_all, stream_name, stream_idx, run_idx)
-    # Marker stream
-    elif stream_name == stream_markers:
+    elif stream_name == stream_markers: # Marker stream
         streams_all = stream_select_markers(streams, streams_all, stream_name, stream_idx, run_idx)
-    # Hand position stream
-    elif stream_name == stream_hand_pos:
+    elif stream_name == stream_hand_pos: # Hand position stream
         streams_all = stream_select_hand_pos(streams, streams_all, stream_name, stream_idx, run_idx)
-    # New stream
-    elif stream_name == stream_new_stream:
+    elif stream_name == stream_new_stream: # Your ew stream
         streams_all = stream_select_new_stream(streams, streams_all, stream_name, stream_idx, run_idx)
 
 ## test_mne_raw_data.py
