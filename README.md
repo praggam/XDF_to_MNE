@@ -17,7 +17,7 @@
 6. Generate info and create MNE raw object of all xdf-files combined
 
 ### Define parameters:
-* Subject parameters: Define path and filenames of the recording files
+* Subject parameters: Define path and filenames of the recording files (hint: put resting state and run files in separate directories)
 * Stream names: Define the names of your LSL streams
 	* stream_neurone:  stream from eeg recroding unit, do not change
 	* stream_markers:  stream for event markers, change the name according to your markers stream name
