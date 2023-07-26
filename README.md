@@ -42,7 +42,7 @@ Converting xdf-file(s) recorded with LabRecorder to MNE raw object
         streams_all = stream_select_markers(streams, streams_all, stream_name, stream_idx, run_idx)  
     elif stream_name == stream_hand_pos: # Hand position stream  
         streams_all = stream_select_hand_pos(streams, streams_all, stream_name, stream_idx, run_idx)  
-    elif stream_name == stream_new_stream: # Your ew stream  
+    elif stream_name == stream_new_stream: # Your new stream  
         streams_all = stream_select_new_stream(streams, streams_all, stream_name, stream_idx, run_idx)  
 
 ## test_mne_raw_data.py
