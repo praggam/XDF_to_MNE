@@ -16,7 +16,8 @@ Converting xdf-file(s) recorded with LabRecorder to MNE raw object
 * Stream names: Define the names of your LSL streams
 	* stream_neurone:  stream from eeg recroding unit, do not change
 	* stream_markers:  stream for event markers, change the name according to your markers stream name
-	* stream_hand_pos: used for tracking hand coordinates, change string to '' if not used
+	* stream_hand_pos: used for tracking hand coordinates (remove from stream_names list if not used):
+   	* stream_names = [stream_neurone, stream_markers]
 * Channel names: Create a list with channel names for data from all streams
 	* EEG channels:   Copy names from montage list
 	* Event markers:  Channel is named 'STIM'
