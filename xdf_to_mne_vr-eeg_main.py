@@ -19,14 +19,16 @@ import scipy
 #%% Define parameters
 
 # Subject directory
-sub_str = 'Pilot_2'
+sub_str = 'test_recording'
 # Paradigm directory
-param_dir = 'resting_state'
+param_dir = 'run_files'
 # Recording directory
 fpath = 'D:' + os.sep + 'VR-EEG' + os.sep + sub_str + os.sep + param_dir
 
 # LSL stream names
-stream_neurone, stream_markers, stream_hand_pos = 'NeuroneStream', 'VR_GAME', 'Hand_POS'
+stream_neurone = 'NeuroneStream'
+stream_markers = 'VR_GAME'
+stream_hand_pos = 'Hand_POS'
 stream_names = [stream_neurone, stream_markers, stream_hand_pos]
 
 # Number of EEG channels
@@ -41,15 +43,17 @@ chan_names = ['Fp1','Fp2','F3','F4','C3','C4','P3','P4','O1','O2','F7','F8','T7'
 # Channel name event markers
 chan_names.append('STIM')
 
-# Hand position markers
-right_x, right_y, right_z,left_x, left_y, left_z = 81, 82, 83, 91, 92, 93
-hand_pos_list = [right_x, right_y, right_z, left_x, left_y, left_z]
-# Number of hand pos channels
-n_chans_hand_pos = len(hand_pos_list)
-# Channel names hand pos
-chan_names_hand_pos = ['HPRx','HPRy','HPRz','HPLx','HPLy','HPLz']
-# Append channels
-for chan in chan_names_hand_pos: chan_names.append(chan)
+# Params for hand pos stream
+if stream_hand_pos in stream_names:
+    # Hand position markers
+    right_x, right_y, right_z,left_x, left_y, left_z = 81, 82, 83, 91, 92, 93
+    hand_pos_list = [right_x, right_y, right_z, left_x, left_y, left_z]
+    # Number of hand pos channels
+    n_chans_hand_pos = len(hand_pos_list)
+    # Channel names hand pos
+    chan_names_hand_pos = ['HPRx','HPRy','HPRz','HPLx','HPLy','HPLz']
+    # Append channels
+    for chan in chan_names_hand_pos: chan_names.append(chan)
 
 
 #%% EEG functions
@@ -116,8 +120,8 @@ def plot_event_markers(markers_data, markers_array, eeg_times, fs, fname, run_id
     # zoom-in / limit the view to different portions of the data
     ax1.set_yticks(markers_array), ax1.set_ylim(400-1,400+1), ax1.grid()
     ax2.set_yticks(markers_array), ax2.set_ylim(300-1,330+1), ax2.grid()
-    ax3.set_yticks(markers_array), ax3.set_ylim(200-1, 243+1), ax3.grid()  # most of the data
-    ax4.set_yticks(markers_array), ax4.set_ylim(100-1, 142+1), ax4.grid()  # outliers only
+    ax3.set_yticks(markers_array), ax3.set_ylim(200-1, 243+1), ax3.grid()
+    ax4.set_yticks(markers_array), ax4.set_ylim(100-1, 142+1), ax4.grid()  
     
     # hide the spines between ax and ax2
     ax1.spines.bottom.set_visible(False)
@@ -364,12 +368,17 @@ def load_lsl_streams(fname,streams_all):
     # Loop through LSL streams and fill dict
     for stream_idx in range(n_streams): 
         stream_name = streams[stream_idx]['info']['name'][0]
-        streams_all[stream_name]['info'].append(streams[stream_idx]['info'])
-        streams_all[stream_name]['footer'].append(streams[stream_idx]['footer'])
-        streams_all[stream_name]['time_stamps'].append(streams[stream_idx]['time_stamps'])
-        if stream_name == stream_neurone:
-            streams_all['n_samples'].append(len(streams[stream_idx]['time_stamps']))
         print('   Stream ' + str(stream_idx + 1) + ': ' + stream_name)
+        
+        try:
+            streams_all[stream_name]['info'].append(streams[stream_idx]['info'])
+            streams_all[stream_name]['footer'].append(streams[stream_idx]['footer'])
+            streams_all[stream_name]['time_stamps'].append(streams[stream_idx]['time_stamps'])
+            if stream_name == stream_neurone:
+                streams_all['n_samples'].append(len(streams[stream_idx]['time_stamps']))
+        except Exception as error:
+            print('   Error: found stream was not defined!')
+            print('  ', type(error).__name__, "–", error)
         
     return streams, streams_all
 
