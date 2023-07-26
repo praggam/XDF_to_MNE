@@ -1,7 +1,11 @@
 # XDF_to_MNE
 
-## Flow:
-1. Scanning directory with recording file(s)
+## xdf_to_mne_vr-egg_main.py
+Converting xdf-file(s) recorded with LabRecorder to MNE raw object
+
+
+### Processing Flow:
+1. Scanning directory with xdf-file(s)
 2. Loading xdf-file(s)
 3. Loading LSL streams of individual xdf-file(s)
 4. Create channels from individual LSL streams
@@ -9,7 +13,7 @@
 6. Generate info and create MNE raw object of all xdf-files combined
 
 
-## Define parameters:
+### Define parameters:
 * Subject parameters:
 	* sub_str: directory of xdf-file(s) of current subject
 	* fpath:   directory of all study recordings
